@@ -5,7 +5,7 @@ UI bersih, modern, dan minimalis. Bisa banyak berkas sekaligus.
 
 ## Fitur
 - 📹 **Video** → ffmpeg (H.264 + AAC), turunkan resolusi & bitrate
-- ⚡ **Akselerasi hardware** (VideoToolbox di macOS) — encoding video puluhan kali lebih cepat, otomatis fallback ke CPU (libx264) bila tak tersedia
+- ⚡ **Akselerasi hardware** (VideoToolbox) — encoding video puluhan kali lebih cepat, otomatis fallback ke CPU (libx264) bila tak tersedia
 - 📱 **MOV/HEVC iPhone** didukung — codec HEVC didekode ke H.264, rotasi iPhone diterapkan otomatis
 - ⏱️ Progres video menampilkan **kecepatan & estimasi sisa waktu (ETA)**
 - 🖼️ **Foto** → sharp (JPG/PNG/WebP), kualitas & resize otomatis

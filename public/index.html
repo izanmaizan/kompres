@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kompres — Video, Foto & PDF</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main class="app">
+    <header class="head">
+      <h1>Kompres</h1>
+      <p>Perkecil ukuran video, foto, dan PDF — banyak berkas sekaligus.</p>
+    </header>
+
+    <!-- Pilih level -->
+    <section class="card">
+      <label class="card-label">Level kompresi</label>
+      <div class="levels" id="levels"></div>
+      <p class="level-hint" id="levelHint"></p>
+    </section>
+
+    <!-- Area unggah -->
+    <section class="dropzone" id="dropzone" tabindex="0">
+      <input type="file" id="fileInput" multiple hidden
+        accept="image/*,video/*,application/pdf" />
+      <div class="dz-icon">
+        <svg viewBox="0 0 24 24" width="34" height="34" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 16V4M12 4l-4 4M12 4l4 4" />
+          <path d="M4 16v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2" />
+        </svg>
+      </div>
+      <p class="dz-title">Tarik berkas ke sini atau <span>pilih berkas</span></p>
+      <p class="dz-sub">Video, Foto (JPG/PNG/WebP), dan PDF · maks 10 GB / berkas</p>
+    </section>
+
+    <!-- Daftar berkas terpilih -->
+    <ul class="queue" id="queue"></ul>
+
+    <button class="btn-primary" id="compressBtn" disabled>Kompres</button>
+
+    <!-- Hasil -->
+    <section class="results" id="results" hidden>
+      <h2>Hasil</h2>
+      <ul id="resultList"></ul>
+    </section>
+  </main>
+
+  <footer class="foot">Berjalan lokal · ffmpeg · ghostscript · sharp</footer>
+
+  <script src="app.js"></script>
+</body>
+</html>

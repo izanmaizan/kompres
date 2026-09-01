@@ -1,0 +1,28 @@
+{
+  "name": "kompres",
+  "version": "1.0.0",
+  "description": "Aplikasi kompresi Video, Foto, dan PDF dengan banyak level kompresi",
+  "main": "server.js",
+  "type": "commonjs",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js"
+  },
+  "keywords": [
+    "kompres",
+    "compress",
+    "video",
+    "image",
+    "pdf",
+    "ffmpeg",
+    "ghostscript",
+    "sharp"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.19.2",
+    "multer": "^2.0.0",
+    "sharp": "^0.33.4"
+  }
+}

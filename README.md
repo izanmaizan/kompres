@@ -11,7 +11,8 @@ UI bersih, modern, dan minimalis. Bisa banyak berkas sekaligus.
 - 🖼️ **Foto** → sharp (JPG/PNG/WebP), kualitas & resize otomatis
 - 📄 **PDF** → ghostscript, kompres gambar di dalam PDF
 - 🎚️ **4 level**: Ringan · Sedang · Kuat · Maksimal
-- 📦 Unggah & proses **banyak berkas** sekaligus (drag & drop)
+- 📦 Unggah & proses **banyak berkas atau 1 folder sekaligus** (drag & drop, termasuk subfolder bersarang) — hingga 10.000 berkas per proses
+- 💻 Pilih folder didukung di semua browser desktop (Chrome/Edge/Firefox/Safari); di HP otomatis jatuh balik ke pilih-banyak-file
 - 📊 **Progres real-time** per berkas: progres unggah + persen pemrosesan video (lewat SSE)
 - 🛡️ **Pengaman ukuran**: kalau hasil ternyata lebih besar dari asli (umum pada HEVC iPhone), berkas asli dikembalikan — tak pernah lebih besar
 - 📥 Lihat persentase penghematan & unduh hasilnya
@@ -62,4 +63,4 @@ event `start`/`progress`/`done`/`complete` per berkas secara real-time.
 
 ## Catatan
 - Berkas unggahan & hasil disimpan sementara di folder temp sistem.
-- Batas ukuran: 10 GB per berkas, maks 20 berkas per permintaan.
+- Batas ukuran: 10 GB per berkas, maks 10.000 berkas per permintaan.

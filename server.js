@@ -55,7 +55,7 @@ function humanSize(bytes) {
 }
 
 // 1) Unggah berkas (progres unggah dipantau klien lewat XHR) -> buat job
-app.post('/api/upload', upload.array('files', 20), (req, res) => {
+app.post('/api/upload', upload.array('files', 10000), (req, res) => {
   const level = LEVELS.includes(req.body.level) ? req.body.level : 'sedang';
   const files = req.files || [];
   if (files.length === 0) {

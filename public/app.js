@@ -19,6 +19,7 @@ const levelsEl = $('levels');
 const levelHint = $('levelHint');
 const dropzone = $('dropzone');
 const fileInput = $('fileInput');
+const folderInput = $('folderInput');
 const queueEl = $('queue');
 const compressBtn = $('compressBtn');
 const resultsEl = $('results');
@@ -100,13 +101,65 @@ dropzone.onkeydown = (e) => {
 };
 fileInput.onchange = () => { addFiles(fileInput.files); fileInput.value = ''; };
 
+$('pickFiles').onclick = (e) => { e.stopPropagation(); fileInput.click(); };
+$('pickFolder').onclick = (e) => { e.stopPropagation(); folderInput.click(); };
+folderInput.onchange = () => { addFiles(folderInput.files); folderInput.value = ''; };
+
 ['dragenter', 'dragover'].forEach((ev) =>
   dropzone.addEventListener(ev, (e) => { e.preventDefault(); dropzone.classList.add('drag'); })
 );
-['dragleave', 'drop'].forEach((ev) =>
+['dragleave'].forEach((ev) =>
   dropzone.addEventListener(ev, (e) => { e.preventDefault(); dropzone.classList.remove('drag'); })
 );
-dropzone.addEventListener('drop', (e) => addFiles(e.dataTransfer.files));
+
+// --- Jelajah folder yang di-drop (rekursif) lewat DataTransferItem entries ---
+function readEntryFile(entry) {
+  return new Promise((resolve) => entry.file(resolve, () => resolve(null)));
+}
+
+function readAllDirectoryEntries(reader) {
+  return new Promise((resolve) => {
+    let all = [];
+    const readBatch = () => {
+      // readEntries() cuma balikin maks ~100 per panggilan, jadi diulang sampai kosong
+      reader.readEntries((entries) => {
+        if (!entries.length) return resolve(all);
+        all = all.concat(entries);
+        readBatch();
+      }, () => resolve(all));
+    };
+    readBatch();
+  });
+}
+
+async function collectEntry(entry, out) {
+  if (!entry) return;
+  if (entry.isFile) {
+    const file = await readEntryFile(entry);
+    if (file) out.push(file);
+  } else if (entry.isDirectory) {
+    const entries = await readAllDirectoryEntries(entry.createReader());
+    for (const e of entries) await collectEntry(e, out);
+  }
+}
+
+async function filesFromDataTransfer(dataTransfer) {
+  const items = dataTransfer.items;
+  const supportsEntries = items && items.length && typeof items[0].webkitGetAsEntry === 'function';
+  if (!supportsEntries) return Array.from(dataTransfer.files); // mobile/browser lama: jatuh balik ke daftar berkas biasa
+
+  const entries = Array.from(items).map((it) => it.webkitGetAsEntry()).filter(Boolean);
+  const out = [];
+  for (const entry of entries) await collectEntry(entry, out);
+  return out;
+}
+
+dropzone.addEventListener('drop', async (e) => {
+  e.preventDefault();
+  dropzone.classList.remove('drag');
+  const files = await filesFromDataTransfer(e.dataTransfer);
+  addFiles(files);
+});
 
 // --- Bangun kartu hasil (status awal: menunggu) untuk tiap berkas ---
 function buildResultCards(files) {

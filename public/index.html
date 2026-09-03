@@ -26,14 +26,15 @@
     <section class="dropzone" id="dropzone" tabindex="0">
       <input type="file" id="fileInput" multiple hidden
         accept="image/*,video/*,application/pdf" />
+      <input type="file" id="folderInput" webkitdirectory directory multiple hidden />
       <div class="dz-icon">
         <svg viewBox="0 0 24 24" width="34" height="34" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
           <path d="M12 16V4M12 4l-4 4M12 4l4 4" />
           <path d="M4 16v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2" />
         </svg>
       </div>
-      <p class="dz-title">Tarik berkas ke sini atau <span>pilih berkas</span></p>
-      <p class="dz-sub">Video, Foto (JPG/PNG/WebP), dan PDF · maks 10 GB / berkas</p>
+      <p class="dz-title">Tarik berkas atau folder ke sini, atau <span id="pickFiles">pilih berkas</span> · <span id="pickFolder">pilih folder</span></p>
+      <p class="dz-sub">Video, Foto (JPG/PNG/WebP), dan PDF · maks 10 GB/berkas · hingga 10.000 berkas sekaligus</p>
     </section>
 
     <!-- Daftar berkas terpilih -->
